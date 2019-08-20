@@ -1,0 +1,372 @@
+@font-face {
+    font-family: 'HelveticaInsetat LT';
+    src: url('./assets/fonts/Helvetica\ Inserat\ LT.ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Myriad Pro Black Cond';
+    src: url('./assets/fonts/MyriadPro-BlackCond.eot');
+    src: url('./assets/fonts/MyriadPro-BlackCond.eot?#iefix') format('embedded-opentype'),
+        url('./assets/fonts/MyriadPro-BlackCond.otf');
+    font-style: normal;
+    font-weight: 400;
+}
+
+$font-family-main: 'Tahoma';
+$font-family-h: 'HelveticaInsetat LT';
+$font-family-logo: 'Myriad Pro Black Cond';
+
+$font-color: #fff;
+$bgr-color: #ccc;
+$bgr-color-med: #a3a3a3;
+$bgr-color-dark: #515151;
+$bgr-color-black: #000;
+
+$icon-width: 24px;
+$icon-height: 16px;
+$icons: './assets/images/flags.jpg';
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: $font-family-main;
+    font-size: 12px;
+    overflow-wrap: break-word;
+    color: $font-color;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        max-width: 1280px;
+        min-width: 800px;
+        margin: 10px auto;
+        padding: 0 64px;
+        box-sizing: border-box;
+
+        .logo {
+            position: absolute;
+            left: 0;
+            top: 85px;
+            width: 31px;
+            height: 109px;
+            background-color: #910000;
+            color: #fff;
+            font-size: 30px;
+            font-family: $font-family-logo;
+            // writing-mode: vertical-rl;
+            // text-orientation: upright;
+            text-transform: uppercase;
+            // letter-spacing: -12px;
+            line-height: 0.8em;
+            cursor: pointer;
+            
+            span {
+                display: block;
+                margin: 7px 0 0 10px;
+                width: 0px;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+            }
+        }
+
+        .header {
+            display: flex;
+            position: relative;
+            width: 100%;      
+            height: 105px;
+            margin: 0 auto 10px;     
+            background-color: $bgr-color;
+            box-sizing: border-box;
+
+            .nav {
+                position: absolute;
+                bottom: 0;
+                left: 10px;
+
+                .navItem {
+                    display: inline-block;
+                    position: relative;
+                    width:86px;
+                    height: 20px;
+                    background-color: $bgr-color-dark;
+                    margin: 0 1px 0 0;
+                    padding: 5px 11px 5px 5px;
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: bold;
+                    line-height: 1.5em;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $bgr-color-black;
+                    }
+                    
+                    &:hover .arrow {
+                        transform: rotate(-45deg); 
+                    }
+                    
+                    .arrow {
+                        float: right;
+                        border-bottom: 5px solid #fff;
+                        border-left: 5px solid transparent;
+                        transform: rotate(45deg);
+                        margin: 7px 0 0 0;
+                    }
+
+                    .subNav {
+                        position: absolute;
+                        top: 30px;
+                        left: 0;
+                        width: 148px;
+                        box-sizing: border-box;
+                        background-color: $bgr-color-black;
+                                                
+                        .subNavItem {
+                            display: block;
+                            padding: 5px 9px;
+                            font-size: 12px;
+                            font-weight: normal;
+                            text-align: left;
+                            line-height: 1em;
+                            &:first-child {
+                                padding-top: 11px;
+                            }
+                            &:last-child {
+                                padding-bottom: 12px;
+                            }
+                            &:hover {
+                                background-color: $bgr-color-dark;
+                            }
+                        }
+                        hr {
+                            margin: 0 5px;
+                            border-top: 1px solid #fff;
+                            border-bottom: 0;
+                        }
+                    }
+                    
+                }
+            }
+
+            .flags {
+                position: absolute;
+                right: 8px;
+                bottom: 5px;
+
+                .flag {
+                    background: url($icons) 0 0 no-repeat;         
+                    width: $icon-width;
+                    height: $icon-height;
+                    display: inline-block;
+                    margin: 0 0 0 4px;
+                    opacity: 0.7;
+                    box-sizing: content-box;
+                    border: 2px solid #909090;
+                    border-radius: 2px;
+                    cursor: pointer;
+
+                    &:hover, &.active {
+                        opacity: 1;
+                        border: 2px solid #232323;
+                    }
+
+                    &.one {
+                        background-position: 0 0;
+                    }
+
+                    &.two {
+                        background-position: 0 -16px;
+                    }
+
+                    &.three {
+                        background-position: 0 -32px;
+                    }
+
+                }
+            }
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;   
+            
+            .leftColumn {
+                flex: 1;
+                padding: 10px;
+                background-color: $bgr-color;
+
+                .content {
+                    background-color: $bgr-color-dark;
+                    min-height: 100%;
+                    box-sizing: border-box;
+
+                    h1 {
+                        font-size: 48px;
+                        font-family: $font-family-h;
+                        font-weight: normal;
+                        padding: 15px 24px 0 24px;
+                        margin: 0;
+                    }
+                    hr {
+                        margin: 8px 10px;
+                        border: 1px solid $bgr-color-black;
+                        box-shadow: 0 1px 0 0 #7a7a7a;
+                    }
+                    p {
+                        padding: 0 24px;
+                    }
+
+                    .dataTable {
+                        display: block;
+                        padding: 0 24px;
+                        font-size: 10px;
+                        line-height: 1em;
+
+                        th, td {
+                            border-bottom: 1px solid #fff;
+                            padding: 2px;
+                            word-break: break-all;
+                             
+                            
+                        }
+
+                        th {
+                            position: relative;
+                            background-color: $bgr-color-black;
+                            padding: 10px 15px 10px 5px;
+                            cursor: pointer;
+
+                            .arrow {
+                                border-bottom: 5px solid #fff;
+                                border-left: 5px solid transparent;
+
+                                &.up {
+                                    position: absolute;                                    
+                                    right: 5px;
+                                    bottom: 12px;
+                                    transform: rotate(-135deg);
+                                }
+                                &.down {
+                                    position: absolute;
+                                    right: 5px;
+                                    bottom: 10px;
+                                    transform: rotate(45deg);
+                                }
+                            }
+                            
+                        }
+                        td:nth-child(odd) {
+                            background-color: $bgr-color-med;
+                        } 
+
+                        td img {
+                            width: 25px;
+                        }
+                    }
+                    .pagination {
+                        padding: 24px;
+                        display: block;
+
+                        & span {
+                            display: inline-block;
+                            color: #fff;
+                            padding: 4px 12px;
+                            text-decoration: none;
+                            transition: background-color .3s;
+                            cursor: pointer;
+                        }
+                    
+                        & span.active {
+                            background-color: $bgr-color-med;
+                        }
+                    }
+                    
+                }
+
+            }
+
+            .rightColumn {
+                width: 30%;
+                min-height: calc(800px - 135px);
+                padding: 10px;
+                background-color: $bgr-color-med;
+
+                .content {
+                    background-color: $bgr-color-dark;
+                    min-height: 100%;
+                    padding: 10px;
+                    box-sizing: border-box;
+
+                    .box {
+                        background-color: $bgr-color-black;
+
+                        .boxHeading {
+                            position: relative;
+                            padding: 11px 12px;
+                            cursor: pointer;
+                            .arrow {
+                                float: right;
+                                right: 10px;
+                                border-bottom: 5px solid #fff;
+                                border-left: 5px solid transparent;
+                                transform: rotate(45deg);
+                                margin: 4px 0 0 0;
+
+                                &.right {
+                                    transform: rotate(-45deg);
+                                }
+                            }
+                        }
+
+                        .boxContent {
+                            padding: 12px 12px 23px 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            width: 100%;
+            min-height: 43px;
+            background-color: $bgr-color;
+            margin: 10px 0 0 0;
+            padding: 12px 20px;
+            box-sizing: border-box;
+
+            .copyRight {
+                display: flex;
+                flex: 1;
+            }
+
+            .links {
+                display: flex;
+                flex: 1;
+                text-align: center;
+                flex-flow: row-reverse;
+                
+
+                span {
+                    margin: 0 0 0 10px;
+                    cursor: pointer;
+                    text-decoration: underline;
+                    
+                    &:hover {
+                        color: $bgr-color-med;
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+.question {
+    color: #000
+}

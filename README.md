@@ -1,44 +1,103 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Test App
 
-## Available Scripts
-
-In the project directory, you can run:
-
+### `npm install`
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# HTML/CSS/JS TEST SPECIFICATION AND REQUIREMENTS
 
-### `npm run build`
+## Page UI
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Liquid layout
+- max content wrapper width: 1280px, min widht: 800
+- content centered on the page
+- right column width: 30% of content wrapper
+- left column and right column padding 10px
+- - - either column can lead the height of the page
+- page main title - embed font -> HelveticaInserat LT
+- logo element must be fixed at all time at the left border of the page
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Dynamics
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- main navigation, drop down menu based on JS - don't use ready scripts
+- right column dynamic boxes:
+- - - click to open, click to close
+- - - two boxes must not be open in the same time 
 
-### `npm run eject`
+### Language menu
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- hover makes flag opaque
+- selected flag is opaque
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Misc
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- font sizes and box sizes may be in %, px or em
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Table Task
 
-## Learn More
+1. Your script must be able to handle number of columns dynamically (i.e. more or less columns, depending on the JSON sent)
+- - - we are going to test the table with different JSONs during the test review
+2. Get sample content with XMLHTTP/FETCH request from here: http://cdn.sbtech.com/rj/mocks/MOCK_DATA.json
+3. Decide on the table HTML structure by yourself (table/div... etc.)
+4. Implement sorting on the column headers (Click on table header sorts by the column ASC/DESC)
+5. Implement pagination (top and bottom of the table) 100 lines per page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Table presentation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | ... |
+-------------------------------------------------
+|  **Title Foo**  |    ...    |  **Title Bar**  |
+-------------------------------------------------
+|    Foo value    |    ...    |    Bar value    |
+-------------------------------------------------
+|    Foo value    |    ...    |    Bar value    |
+-------------------------------------------------
+|                      ...                      |
+-------------------------------------------------
+|    Foo value    |    ...    |    Bar value    |
+-------------------------------------------------
+|    Foo value    |    ...    |    Bar value    |
+-------------------------------------------------
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | ... |
+
+## Technical requirements
+
+### Mandatory tech stack
+
+- TypeScript 3.x
+- React 16.6.x (NO REDUX!)
+- MobX
+- Any styles pre-processor
+
+### Cross-browser
+
+- 11+
+- Edge
+- FF
+- Chrome
+
+## What are we checking about your code:
+
+- structure
+- quality
+- consistency
+- reusability
+
+## !!! IMPORTANT !!!
+
+## Your test does NOT qualify for review if:
+
+- CSS "frameworks"
+- You somehow included jQuery to the tech stack
+- We need to fiddle with your code to make it work
+- Code doesn't use one or more of the mandatory tools
+- JSON content is not loaded with AJAX from the provided url
+
+## Bonus points
+
+Bonus points to the task completion are going to be awarded for:
+
+- Unit Tests
+- Code Linting
