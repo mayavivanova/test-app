@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HeadCell from './HeadCell/HeadCell'
 import Row from './Row/Row'
 import Pagination from './Pagination/Pagination'
+import quickSort from '../../../../Sorting/Sorting'
 
 type TableState = {
     loading?: boolean;
@@ -90,6 +91,21 @@ class Table extends Component<TableState> {
             })
         }
     }
+
+    // sortByKey = (key: string): any => {
+    //     let prevKey = this.state.prevKey;
+
+    //     if(key !== prevKey) {     
+    //         this.setState({
+    //             prevKey: key,
+    //             table: quickSort(this.state.table, key) 
+    //         })
+    //     } else {
+    //         this.setState({
+    //             table: this.state.table.reverse()
+    //         })
+    //     }
+    // }
 
     getHeader = (keys: string[]): React.ReactNode => (
         keys.map((keyData: string, index: number): JSX.Element => (
