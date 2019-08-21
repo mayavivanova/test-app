@@ -1,0 +1,5 @@
+export const boxesData = [
+    {id: 1, content: '1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indus book.  desktop publishing software like Aldus PageMaker including versions of Lorem ageMaker including versions of Lorem Ipsum...'},
+    {id: 2, content: '2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indus book.  desktop publishing software like Aldus PageMaker including versions of Lorem ageMaker including versions of Lorem Ipsum...'},
+    {id: 3, content: '3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indus book.  desktop publishing software like Aldus PageMaker including versions of Lorem ageMaker including versions of Lorem Ipsum...'}
+]

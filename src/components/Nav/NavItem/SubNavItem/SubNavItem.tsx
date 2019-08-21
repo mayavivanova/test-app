@@ -1,16 +1,14 @@
 import React from 'react'
 
-const subNavItem = (props: {subNav: string[]}): JSX.Element => {
+export const SubNavItem = (props: {subNav: string[]}): JSX.Element => {
 
-    let subNavItem = props.subNav.map((item: string): JSX.Element => 
+    let subItem = props.subNav.map((item: string): JSX.Element => 
                         <span key={item} className="subNavItem">{item}</span>
                     )
 
     return (
         <div className="subNav">
-            {subNavItem}
+            {subItem}
         </div> 
     )
 }
-
-export default subNavItem

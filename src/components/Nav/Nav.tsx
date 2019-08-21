@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
-import NavItem from './NavItem/NavItem'
-
-const navItems: NavItems[]  = [
-    {text:'Home', url: '/'},
-    {text: 'Sports', url: '/sports'},
-    {text: 'Casino', url: '/casino'},
-    {text: 'Games', url: '/games', subNav: ['Mega Moolah', 'The curse of the Black Pearl', 'Super slots attack']}
-]
+import { navData } from '../../data/navData'
+import { NavItem } from './NavItem/NavItem'
 
 type NavItems = { text?: string; url?: string; subNav?: string[]}
 type NavState = { show?: boolean; hovered?: number | null}
 
-class Nav extends Component<NavState> {
+export class Nav extends Component<NavState> {
     state: NavState = {
         show: false,
         hovered: null
@@ -34,7 +28,7 @@ class Nav extends Component<NavState> {
     render () {
         const { show, hovered } = this.state;
 
-        let item = navItems.map((item: NavItems): JSX.Element => (
+        let item = navData.map((item: NavItems): JSX.Element => (
             <NavItem 
                 key={item.text} 
                 item={item}
@@ -53,5 +47,3 @@ class Nav extends Component<NavState> {
         )
     }
 }
-
-export default Nav

@@ -1,12 +1,11 @@
-import React from 'react';
-import LeftColumn from './LeftColumn/LeftColumn'
-import RightColumn from './RightColumn/RightColumn'
+import React, { PureComponent } from 'react';
 
-const main = (): JSX.Element => (
-    <main className="main">
-        <LeftColumn />
-        <RightColumn />
-    </main>
-)
-
-export default main
+export class Main extends PureComponent<{}, {}> {
+    render () {
+        return (
+            <main className="main">
+                {this.props.children}
+            </main>
+        )
+    }   
+}

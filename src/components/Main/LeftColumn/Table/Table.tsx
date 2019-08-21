@@ -13,7 +13,7 @@ type TableState = {
     prevKey?: string
 };
 
-class Table extends Component<TableState> {
+export class Table extends Component<TableState> {
 
     state: TableState = {
         loading: false,
@@ -193,5 +193,3 @@ class Table extends Component<TableState> {
         )
     }
 }
-
-export default Table

@@ -9,7 +9,7 @@ type Props = {
     title?: string
 
 }
-const box = (props: Props): JSX.Element => {
+export const Box = (props: Props): JSX.Element => {
 
     const condition = (props.index === props.currentIndex) && props.open;
     const heading = condition ? 'Click to close' : 'Click to open';
@@ -33,5 +33,3 @@ const box = (props: Props): JSX.Element => {
         </div>
     ) 
 }
-
-export default box

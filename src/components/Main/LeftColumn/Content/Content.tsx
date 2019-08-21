@@ -1,6 +1,6 @@
 import React from 'react'
 
-const content = (): JSX.Element => (
+export const Content = (): JSX.Element => (
     <div>
         <h1>Page title</h1>
         <hr/>
@@ -15,5 +15,3 @@ const content = (): JSX.Element => (
         </p>
     </div>
 )
-
-export default content;

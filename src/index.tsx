@@ -4,6 +4,6 @@ import React from 'react'
 import ReactDOM from 'react-dom' 
 
 import './index.scss' 
-import Wrapper from './components/Wrapper' 
+import App from './components/App' 
 
-ReactDOM.render(<Wrapper />,document.getElementById("root"))
+ReactDOM.render(<App />,document.getElementById("root"))

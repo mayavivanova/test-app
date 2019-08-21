@@ -1,5 +1,5 @@
 import React from 'react'
-import SubNavItem from './SubNavItem/SubNavItem'
+import { SubNavItem } from './SubNavItem/SubNavItem'
  
 type Props = {
     subNav?: string[];
@@ -11,7 +11,7 @@ type Props = {
     onHideSubNav?: () => void;
 }
 
-const navItem = (props: Props): JSX.Element => {
+export const NavItem = (props: Props): JSX.Element => {
     
     let subNavigation: JSX.Element | null = null;
     let arrow: JSX.Element | null = null;
@@ -35,5 +35,3 @@ const navItem = (props: Props): JSX.Element => {
         </span>
     )
 }
-
-export default navItem
