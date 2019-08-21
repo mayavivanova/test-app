@@ -9,7 +9,7 @@ type TableState = {
     error?: string | null;
     perPage?: any;
     currentPage?: any;
-    alreadySortedKeys?: any
+    prevKey?: string
 };
 
 class Table extends Component<TableState> {
@@ -20,7 +20,7 @@ class Table extends Component<TableState> {
         error: null,
         perPage: 100,
         currentPage: 1, 
-        alreadySortedKeys: []
+        prevKey: ''
     }
 
     componentDidMount () {
@@ -63,13 +63,12 @@ class Table extends Component<TableState> {
     }
 
     sortByKey = (key: string): any => {
-        let sortingArr = this.state.alreadySortedKeys;
+        let prevKey = this.state.prevKey;
         
-        if(sortingArr.indexOf(key) === -1) {            
-            sortingArr.push(key);
+        if(key !== prevKey) {     
             this.setState({
-                alreadySortedKeys: sortingArr,
-                table: this.state.table.sort((a: any, b: any): number => {
+                prevKey: key,
+                table: this.state.table.sort((a: any, b: any): number | null => {
                     if(isNaN(a[key]) && isNaN(b[key])) {
                         let x = String(a[key]).toLowerCase(); 
                         let y = String(b[key]).toLowerCase(); 
@@ -77,7 +76,9 @@ class Table extends Component<TableState> {
                             return 1 
                         if (x < y) 
                             return -1 
-			            return 0;
+                        return 0;
+                    } else if (a[key] === null) {
+                        return -1;
                     } else {
                         return a[key] - b[key];
                     }
@@ -99,16 +100,10 @@ class Table extends Component<TableState> {
         ))
     )
 
-    getCurrentPage = (currentPage: number): void => {
-        this.setState({
-            currentPage: currentPage
-        })
-    }
-
     getRowsData = (): JSX.Element => {
         const { table, currentPage } = this.state;
         const keys = this.getKeys(table);
-
+       
         const { perPage } = this.state;   
         const rows =  
             table.slice((currentPage-1) * perPage, currentPage * perPage)

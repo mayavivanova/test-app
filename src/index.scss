@@ -209,11 +209,13 @@ body {
                         padding: 15px 24px 0 24px;
                         margin: 0;
                     }
+
                     hr {
                         margin: 8px 10px;
                         border: 1px solid $bgr-color-black;
                         box-shadow: 0 1px 0 0 #7a7a7a;
                     }
+
                     p {
                         padding: 0 24px;
                     }
@@ -306,6 +308,7 @@ body {
                             position: relative;
                             padding: 11px 12px;
                             cursor: pointer;
+
                             .arrow {
                                 float: right;
                                 right: 10px;
@@ -353,8 +356,8 @@ body {
 
                 span {
                     margin: 0 0 0 10px;
-                    cursor: pointer;
                     text-decoration: underline;
+                    cursor: pointer;
                     
                     &:hover {
                         color: $bgr-color-med;
@@ -365,8 +368,4 @@ body {
 
 
     }
-}
-
-.question {
-    color: #000
 }
