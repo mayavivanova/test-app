@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from './Table';
+import { tableData } from '../../../../data/tableData' 
 
 type TableState = {
     loading?: boolean;
@@ -17,28 +18,22 @@ export class TableContainer extends Component<TableState> {
         currentPage: 1, 
         prevKey: ''
     }
-
+    
     componentDidMount() {
         this.setState({loading: true})
-        fetch('http://cdn.sbtech.com/rj/mocks/MOCK_DATA.json')
-            .then(res => {
-                if(res.ok) return res.json()
-                else {
-                    throw new Error ('Cannot load data...')
-                }
+        
+        tableData().then(data => {
+            this.setState({
+                loading: false,
+                table: data
             })
-            .then(data => {
-                this.setState({
-                    loading: false,
-                    table: data
-                })
+        })
+        .catch((error) => {
+            this.setState({ 
+                error, 
+                isLoading: false
             })
-            .catch((error) => {
-                this.setState({ 
-                    error, 
-                    isLoading: false
-                })
-            })
+        })
     }
 
     getKeys = (table: []): string[] => {
