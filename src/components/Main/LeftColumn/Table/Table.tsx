@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
+import { any } from 'prop-types';
 
-export class Table extends Component<any> {
+type TableProps = {
+    sortByKey?: any;
+    updateCurrentPageOnClick?: any;
+    table: [];
+    currentPage: number;
+    keys: string[]
+};
+
+export class Table extends Component<TableProps> {
 
     renderHeader = (keys: string[]): React.ReactNode => (
         keys.map((keyData: string, index: number): JSX.Element => (
@@ -14,7 +23,7 @@ export class Table extends Component<any> {
         ))
     )
 
-    renderRows = (table: any, currentPage: any, keys: any): JSX.Element => {
+    renderRows = (table: [], currentPage: number, keys: string[]): {} => {
         const rows =  
             table.slice((currentPage-1) * 100, currentPage * 100)
                 .map((row: [], index: number): JSX.Element => {
@@ -41,7 +50,7 @@ export class Table extends Component<any> {
         })
     )
 
-    renderPagination = (table: any, currentPage: any, keys: any): any => {
+    renderPagination = (table: [], currentPage: number, keys: string[]): any => {
 
         const arrPages = [...Array(Math.ceil(table.length / 100))]
             .map((_, n: number): any => (
@@ -51,7 +60,7 @@ export class Table extends Component<any> {
         return arrPages;        
     }
 
-    reRenderOnClick = (table: any, currentPage: any, keys: any): any => {
+    reRenderOnClick = (table: any, currentPage: any, keys: string[]): any => {
         const updatedCurrentPage = this.props.updateCurrentPageOnClick;
             if (currentPage !== updatedCurrentPage) {
                 updatedCurrentPage(currentPage)
