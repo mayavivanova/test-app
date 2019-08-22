@@ -1,195 +1,91 @@
 import React, { Component } from 'react'
-import HeadCell from './HeadCell/HeadCell'
-import Row from './Row/Row'
-import Pagination from './Pagination/Pagination'
-import quickSort from '../../../../Sorting/Sorting'
 
-type TableState = {
-    loading?: boolean;
-    table?: any;
-    error?: string | null;
-    perPage?: any;
-    currentPage?: any;
-    prevKey?: string
-};
+export class Table extends Component<any> {
 
-export class Table extends Component<TableState> {
-
-    state: TableState = {
-        loading: false,
-        table: [],
-        error: null,
-        perPage: 100,
-        currentPage: 1, 
-        prevKey: ''
-    }
-
-    componentDidMount () {
-        this.setState({loading: true})
-        fetch('http://cdn.sbtech.com/rj/mocks/MOCK_DATA.json')
-            .then(res => {
-                if(res.ok) return res.json()
-                else {
-                    throw new Error ('Cannot load data...')
-                }
-            })
-            .then(data => {
-                this.setState({
-                    loading: false,
-                    table: data
-                })
-            })
-            .catch((error) => {
-                this.setState({ 
-                    error, 
-                    isLoading: false
-                })
-            })
-    }
-
-
-    getKeys = (table: []): string[] => {
-        let keyArr: any = [];
-        table.map((obj: {key: string}): string[] => {
-            return Object.keys(obj).map((key: string): string => {
-                key = key.toString()
-
-                if(!keyArr.includes(key)) {
-                    keyArr.push(key)    
-                }    
-                return keyArr
-            })                     
-        });
-        return keyArr
-    }
-
-    sortByKey = (key: string): any => {
-        let prevKey = this.state.prevKey;
-        
-        if(key !== prevKey) {     
-            this.setState({
-                prevKey: key,
-                table: this.state.table.sort((a: any, b: any): number | null => {
-                    if(isNaN(a[key]) && isNaN(b[key])) {
-                        let x = String(a[key]).toLowerCase(); 
-                        let y = String(b[key]).toLowerCase(); 
-                        if (x > y) 
-                            return 1 
-                        if (x < y) 
-                            return -1 
-                        return 0;
-                    } else if (a[key] === null) {
-                        return -1;
-                    } else {
-                        return a[key] - b[key];
-                    }
-                })
-            })
-        } else {
-            this.setState({
-                table: this.state.table.reverse()
-            })
-        }
-    }
-
-    // sortByKey = (key: string): any => {
-    //     let prevKey = this.state.prevKey;
-
-    //     if(key !== prevKey) {     
-    //         this.setState({
-    //             prevKey: key,
-    //             table: quickSort(this.state.table, key) 
-    //         })
-    //     } else {
-    //         this.setState({
-    //             table: this.state.table.reverse()
-    //         })
-    //     }
-    // }
-
-    getHeader = (keys: string[]): React.ReactNode => (
+    renderHeader = (keys: string[]): React.ReactNode => (
         keys.map((keyData: string, index: number): JSX.Element => (
-            <HeadCell 
-                key={index} 
-                keyData={keyData} 
-                sortByColumn={() => this.sortByKey(keyData)}/>
+            <th key={index} onClick={() => this.props.sortByKey(keyData)}>
+                {keyData}    
+                <span title="Sort ASC/DESC">
+                    <span className="arrow up"></span>
+                    <span className="arrow down"></span>
+                </span>     
+            </th>
         ))
     )
 
-    getRowsData = (): JSX.Element => {
-        const { table, currentPage } = this.state;
-        const keys = this.getKeys(table);
-       
-        const { perPage } = this.state;   
+    renderRows = (table: any, currentPage: any, keys: any): JSX.Element => {
         const rows =  
-            table.slice((currentPage-1) * perPage, currentPage * perPage)
+            table.slice((currentPage-1) * 100, currentPage * 100)
                 .map((row: [], index: number): JSX.Element => {
-                    return  <Row 
-                                key={index} 
-                                data={row} 
-                                keys={keys}/>
+                    return (
+                        <tr key={index}>
+                            {this.renderCell(row, keys)}
+                        </tr>
+                    )
                 });
         return rows;
     }
 
-    renderRowsDataOnClick = (currentPage: number): () => void => {
-        this.setState({
-            currentPage: currentPage
+    renderCell = (data: any, keys: any): JSX.Element => (
+        keys.map((key: string, index: number): JSX.Element => {
+            if(key === 'Avatar' && data[key]) {
+                return (
+                    <td key={index}>
+                        <img src={data[key]} alt={key}/>
+                    </td>
+                )
+            } else {
+                return <td key={index}>{data[key]}</td>
+            }
         })
-        return this.getRowsData
-    }
+    )
 
-    renderPagination = (): React.ReactNode => {
-        const { table, perPage } = this.state;
+    renderPagination = (table: any, currentPage: any, keys: any): any => {
 
-        const arrPages = [...Array(Math.ceil(table.length / perPage))]
-                            .map((_, n: number): JSX.Element => (
-                                <Pagination 
-                                    key={n+1} 
-                                    pageNum={n+1} 
-                                    onClickPage={() => 
-                                        this.renderRowsDataOnClick(n+1)}
-                                />
-                            ))
+        const arrPages = [...Array(Math.ceil(table.length / 100))]
+            .map((_, n: number): any => (
+                <span key={n+1} onClick={() => this.reRenderOnClick(table, (n+1), keys)}>{n+1}</span>
+                
+            ))
         return arrPages;        
     }
 
-    render () {
-        
-        const { loading, table, error } = this.state;
-        const keys = this.getKeys(table);
+    reRenderOnClick = (table: any, currentPage: any, keys: any): any => {
+        const updatedCurrentPage = this.props.updateCurrentPageOnClick;
+            if (currentPage !== updatedCurrentPage) {
+                updatedCurrentPage(currentPage)
+                return (            
+                    this.renderRows(table, currentPage, keys)
+                )
+            }
+    }
 
-        if(error) {
-            return <p>{error}</p>
-        }
-        if(loading) {
-            return <p>Loading...</p>
-        } 
-        
+    render() {      
+        const { table, currentPage, keys } = this.props;
+
         return (
             <div>
                 <div className="pagination">
-                    {this.renderPagination()} 
+                    {this.renderPagination(table, currentPage, keys)}
                 </div>
 
                 <table className="dataTable" >
                 <thead>
                     <tr>
-                        {this.getHeader(keys)}
+                        {this.renderHeader(keys)}
                     </tr>
                 </thead>
                 <tbody>
-                    {this.getRowsData()}
+                    {this.renderRows(table, currentPage, keys)}
                 </tbody>
                 </table>
 
                 <div className="pagination">
-                    {this.renderPagination()} 
+                    {this.renderPagination(table, currentPage, keys)}
                 </div> 
                 
             </div>
-           
-            
         )
     }
-}
+  }

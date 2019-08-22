@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Nav } from './Nav/Nav'
-import { Main, Boxes, Content, Table } from './Main'
+import { Main, Boxes, Content, TableContainer } from './Main'
 import { Footer } from './Footer/Footer'
 
 
@@ -20,7 +20,7 @@ const App = (): JSX.Element => (
             <section className="leftColumn">
                 <div className="content">
                     <Content />
-                    <Table/>
+                    <TableContainer/>
                 </div>
             </section>
             <aside className="rightColumn">

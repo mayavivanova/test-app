@@ -1,2 +1,2 @@
 export * from './Content/Content'
-export * from './Table/Table'
+export * from './Table/TableContainer'
