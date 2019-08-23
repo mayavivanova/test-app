@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Table } from './Table';
-import { tableData } from '../../../../data/tableData' 
 
 type TableState = {
     loading?: boolean;
@@ -9,8 +8,11 @@ type TableState = {
     currentPage?: any;
     prevKey?: string
 };
+type PropsType = {
+    data?: any
+}
 
-export class TableContainer extends Component<TableState> {
+export class TableContainer extends Component<PropsType, TableState> {
     state: TableState = {
         loading: false,
         table: [],
@@ -22,18 +24,12 @@ export class TableContainer extends Component<TableState> {
     componentDidMount() {
         this.setState({loading: true})
         
-        tableData().then(data => {
+        this.props.data.then((data: any) =>{
             this.setState({
-                loading: false,
-                table: data
+              loading: false,
+              table: data
             })
-        })
-        .catch((error) => {
-            this.setState({ 
-                error, 
-                isLoading: false
-            })
-        })
+          })
     }
 
     getKeys = (table: []): string[] => {

@@ -5,7 +5,7 @@ import { Main, Boxes, Content, TableContainer } from './Main'
 import { Footer } from './Footer/Footer'
 
 
-const App = (): JSX.Element => (
+const App = (props: any): JSX.Element => (
     <div className="wrapper">
         <div className="logo"><span>Logo</span></div>
         <header className="header">
@@ -20,7 +20,7 @@ const App = (): JSX.Element => (
             <section className="leftColumn">
                 <div className="content">
                     <Content />
-                    <TableContainer/>
+                    <TableContainer data={props.data}/>
                 </div>
             </section>
             <aside className="rightColumn">

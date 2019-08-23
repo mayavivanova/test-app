@@ -4,6 +4,17 @@ import React from 'react'
 import ReactDOM from 'react-dom' 
 
 import './index.scss' 
-import App from './components/App' 
+import App from '../src/components/App'
+import { Data } from './data/tableData'
 
-ReactDOM.render(<App />,document.getElementById("root"))
+const dataInstance = new Data()
+
+const getData = (async function() : Promise<string> {
+  await dataInstance.fetchedData();
+  return dataInstance.data;
+}());
+
+ReactDOM.render(
+  <App data={getData} />, document.getElementById("root")
+)
+// ReactDOM.render(<App />,document.getElementById("root"))
